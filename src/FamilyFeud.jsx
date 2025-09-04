@@ -1,13 +1,47 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, Send, CheckCircle2 } from 'lucide-react';
 import GlitchText from './components/GlitchText';
 // --- Game Data ---
-const gameData = {
-question: "What’s the most common breakup reason in college?",
-answers: ["Exams 📚", "Long distance 🛣️", "Found someone new 👀", "Family pressure 👵", "Caught by warden 🚨", "Money 💸", "Cheating 💔", "No time ⏰", "Too clingy 😬", "Boring 😴"]
-,
-};
+const gameData = [
+  {
+    question: "What’s the most common breakup reason in college?",
+    answers: ["Exams 📚", "Long distance 🛣️", "Found someone new 👀", "Family pressure 👵", "Caught by warden 🚨", "Money 💸", "Cheating 💔", "No time ⏰", "Too clingy 😬", "Boring 😴"]
+  },
+  {
+    question: "What do students actually mean by 'group study'?",
+    answers: [
+      "Netflix 🍿",
+      "Cards 🎲",
+      "Snacks 🍔",
+      "Gossip 🗣️",
+      "Sleep 💤",
+      "Music 🎶",
+      "Movies 🎬",
+      "Romance 😉",
+      "Memes 😂",
+      "Private tuitions 😏"
+    ]
+  },
+  {
+    question: "Name a place on campus where couples are always spotted.",
+    answers: [
+      "Canteen 🍵",
+      "Garden 🌹",
+      "Library 📚",
+      "Rooftop 🌌",
+      "Parking 🛵",
+      "Stairs 🪜",
+      "Empty class 🏫",
+      "Hostel room 🛏️",
+      "Cafe ☕",
+      "Corridor 🚶"
+    ]
+  }
+];
+
+
+
 
 // --- Animation Variants ---
 const cardVariants = {
@@ -20,6 +54,7 @@ const FamilyFeudGame = () => {
 const [step, setStep] = useState('username'); // 'username', 'playing', 'submitted'
 const [username, setUsername] = useState('');
 const [selectedAnswers, setSelectedAnswers] = useState([]);
+const [question, setQuestion]=useState(1);
 
 const handleStartGame = (e) => {
 e.preventDefault();
@@ -97,7 +132,7 @@ return (
         className="w-full max-w-md mx-auto bg-blue-950/20 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-blue-400/20 bg-opacity-30"
         >
         <p className="text-center text-blue-200/90 text-sm">Hi, {username}!</p>
-        <h2 className="text-2xl font-bold text-center mb-4">{gameData.question}</h2>
+        <h2 className="text-2xl font-bold text-center mb-4">{gameData[question]?.question}</h2>
         
         {/* Progress Bar */}
         {selectedAnswers.length > 0 && (
@@ -107,7 +142,7 @@ return (
         )}
 
         <div className="grid grid-cols-2 gap-3">
-            {gameData.answers.map((answer) => {
+            {gameData[question]?.answers.map((answer) => {
             const isSelected = selectedAnswers.includes(answer);
             return (
                 <motion.button
