@@ -11,7 +11,7 @@ const inlineStyles = {
 const hoverClass = enableOnHover ? 'enable-on-hover' : '';
 
 return (
-<div className={`glitch ${hoverClass} ${className}` } style={inlineStyles} data-text={children}>
+<div className={`glitch ${hoverClass} ${className} flex justify-center items-center`} style={inlineStyles} data-text={children}>
     {children}
 </div>
 );

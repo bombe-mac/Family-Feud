@@ -58,15 +58,17 @@ return (
         onSubmit={handleStartGame}
         className="w-full max-w-md mx-auto bg-blue-950/20 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-blue-400/20 bg-opacity-30"
         >
-        <GlitchText
-    speed={1}
-    enableShadows={true}
-    enableOnHover={false}
-    className='custom-class'
-        >
-        Family-Feud
-        </GlitchText>
-        <p className="text-center text-white/80 mb-8">Enter your name to start.</p>
+        <div className="flex flex-col items-center justify-center mb-8">
+          <GlitchText
+            speed={1}
+            enableShadows={true}
+            enableOnHover={false}
+            className="text-center text-5xl font-bold mb-4"
+          >
+            Family Feud
+          </GlitchText>
+          <p className="text-center text-white/80">Enter your name to start.</p>
+        </div>
         <div className="relative">
             <User className="absolute left-3 top-1/2 -translate-y-1/2 text-white/50" size={20} />
             <input
