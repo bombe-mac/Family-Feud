@@ -4,8 +4,9 @@ import { User, Send, CheckCircle2 } from 'lucide-react';
 import GlitchText from './components/GlitchText';
 // --- Game Data ---
 const gameData = {
-question: "Name something people are often running late for.",
-answers: [ "Work", "Appointments", "School", "Meetings", "The Bus/Train", "Parties", "Church", "Dinner", "Flights", "Weddings"],
+question: "What’s the most common breakup reason in college?",
+answers: ["Exams 📚", "Long distance 🛣️", "Found someone new 👀", "Family pressure 👵", "Caught by warden 🚨", "Money 💸", "Cheating 💔", "No time ⏰", "Too clingy 😬", "Boring 😴"]
+,
 };
 
 // --- Animation Variants ---
