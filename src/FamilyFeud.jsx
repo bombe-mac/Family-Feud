@@ -27,23 +27,17 @@ if (username.trim()) setStep('playing');
 };
 
 const handleSelectAnswer = (answerText) => {
-setSelectedAnswers((prev) =>
-    prev.includes(answerText)
-    ? prev.filter((a) => a !== answerText)
-    : prev.length < 5
-    ? [...prev, answerText]
-    : prev
-);
+setSelectedAnswers([answerText]); // Only store the most recent selection
 };
 
 const handleSubmitAnswers = () => {
-if (selectedAnswers.length === 5) {
-    console.log({ user: username, selections: selectedAnswers });
+if (selectedAnswers.length === 1) {
+    console.log({ user: username, selection: selectedAnswers[0] });
     setStep('submitted');
 }
 };
 
-const progressPercentage = (selectedAnswers.length / 5) * 100;
+const hasSelection = selectedAnswers.length === 1;
 
 return (
 <div className="min-h-[100svh] w-full flex flex-col items-center justify-center p-4 font-sans text-white overflow-hidden">
@@ -106,16 +100,11 @@ return (
         <h2 className="text-2xl font-bold text-center mb-4">{gameData.question}</h2>
         
         {/* Progress Bar */}
-        <div className="w-full bg-blue-950/30 rounded-full h-2.5 mb-1">
-            <motion.div
-            className="bg-gradient-to-r from-blue-400/80 to-blue-600/80 h-2.5 rounded-full"
-            animate={{ width: `${progressPercentage}%` }}
-            transition={{ ease: "easeInOut", duration: 0.5 }}
-            />
-        </div>
-        <p className="text-center text-sm font-semibold text-yellow-300 mb-6">
-            Selected {selectedAnswers.length} of 5 answers.
-        </p>
+        {selectedAnswers.length > 0 && (
+          <p className="text-center text-sm font-semibold text-blue-300 mb-6">
+            Your answer: {selectedAnswers[0]}
+          </p>
+        )}
 
         <div className="grid grid-cols-2 gap-3">
             {gameData.answers.map((answer) => {
@@ -146,7 +135,7 @@ return (
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleSubmitAnswers}
-            disabled={selectedAnswers.length !== 5}
+            disabled={!hasSelection}
             className="w-full mt-8 py-3 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600/60 to-blue-900/60 backdrop-blur-sm rounded-lg text-lg font-bold shadow-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed border border-blue-400/20 hover:from-blue-500/60 hover:to-blue-800/60 text-blue-100"
         >
             <Send size={20} /> Submit
@@ -172,7 +161,8 @@ return (
             <CheckCircle2 className="mx-auto text-blue-400" size={80} />
         </motion.div>
         <h2 className="text-3xl font-bold mt-4 mb-2">Response Noted!</h2>
-        <p className="text-white/80">Thanks for playing, {username}. We've received your selections.</p>
+        <p className="text-blue-200/90 mb-2">Thanks for playing, {username}!</p>
+        <p className="text-white/80">Your answer: {selectedAnswers[0]}</p>
         </motion.div>
     )}
     </AnimatePresence>
