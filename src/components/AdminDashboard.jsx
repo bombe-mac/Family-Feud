@@ -3,8 +3,17 @@ import { motion } from 'framer-motion';
 import { BarChart3, Users, Lock, UnlockKeyhole, ArrowRight } from 'lucide-react';
 
 const AdminDashboard = () => {
-const [stats, setStats] = useState(null);
-const [currentQuestion, setCurrentQuestion] = useState(null);
+const [stats, setStats] = useState({
+    stats: {},
+    topFive: [
+        {option: "Exams 📚", count: 5, percentage: 12},
+        {option: "Social Pressure", count: 3, percentage: 50},
+        {option: "Lack of Time", count: 5, percentage: 20},
+        {option: "Financial Issues", count: 9, percentage: 18},
+        {option: "Mental Health", count: 10, percentage: 0}
+    ]
+});
+const [currentQuestion, setCurrentQuestion] = useState({text: "What’s the most common breakup reason in college?"});
 const [isLocked, setIsLocked] = useState(false);
 const [token, setToken] = useState(localStorage.getItem('adminToken'));
 const [password, setPassword] = useState('');
@@ -31,6 +40,8 @@ const [error, setError] = useState('');
 //       socket.off('question_state');
 //     };
 //   }, [token]);
+
+
 
 const handleLogin = async (e) => {
 e.preventDefault();
@@ -85,7 +96,7 @@ try {
 
 if (!token) {
 return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-blue-950/90">
+    <div className="min-h-screen w-full flex items-center justify-center bg-black p-4">
     <motion.form 
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -115,7 +126,7 @@ return (
 }
 
 return (
-<div className="min-h-screen w-full p-6 bg-blue-950/90">
+<div className="min-h-screen w-full p-6 bg-black">
     <div className="max-w-6xl mx-auto">
     <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
